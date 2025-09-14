@@ -50,3 +50,4 @@ export class headerCom extends HTMLElement {
     }
 
 }
+ customElements.define('header-com', headerCom);

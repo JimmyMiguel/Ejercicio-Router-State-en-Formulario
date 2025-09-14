@@ -1,5 +1,13 @@
+import "./footerCom";
+import "./headerCom";
+import { state } from "../state";
 
-export class welcomeCom extends HTMLElement {
+
+
+export function welcomFun (goTo:Function):Element{
+
+
+  class welcomeCom extends HTMLElement {
     constructor() {
       super();
       this.render();
@@ -81,22 +89,42 @@ export class welcomeCom extends HTMLElement {
   }
 
 </style>
-
-<div class="header-div">
-  <h2>Header</h2>
-</div>
+<header-com></header-com>
 
 <div class="form-container">
   <h1>Te damos la bienvenida a esta página</h1>
   <p>Para continuar ingresá tu nombre</p>
   <label for="nombre">Nombre</label>
-  <input type="text" id="nombre" placeholder="Ingrese su nombre" name="nombre" />
-  <button>Comenzar</button>
+  <input class="nombreIng" type="text" id="nombre" placeholder="Ingrese su nombre" name="nombre" />
+  <button class= "botonComenzar">Comenzar</button>
 </div>
-
+<footer-com></footer-com>
 
       `;
+      const botonComenzar = shadow.querySelector(".botonComenzar")
+      const imputboton = shadow.querySelector(".nombreIng") as HTMLInputElement
+
+
+        botonComenzar?.addEventListener("click", () => {
+          if (imputboton.value.trim() === "") {
+            alert("Por favor, ingresa tu nombre.");
+            return;
+          }
+          state.setState(imputboton.value);
+          goTo("/header");
+        });
+
+
+
     }
   }
+      if (!customElements.get('welcome-com')) {
+      customElements.define('welcome-com', welcomeCom);
+    }
 
-  
+
+
+   const welcomeTag = document.createElement('welcome-com')
+  return welcomeTag
+
+}
