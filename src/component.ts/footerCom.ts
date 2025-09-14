@@ -55,3 +55,4 @@ export class footerCom extends HTMLElement {
     }
 
 }
+customElements.define('footer-com', footerCom);
